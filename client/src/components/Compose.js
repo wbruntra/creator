@@ -28,7 +28,7 @@ function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
 function Compose(props) {
   const [draftTitle, setDraftTitle] = useState('');
 
-  const [title, setTitle] = useState('His');
+  const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
   const handleForm = e => {
