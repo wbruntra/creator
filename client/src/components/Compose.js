@@ -28,7 +28,7 @@ function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
 function Compose(props) {
   const [draftTitle, setDraftTitle] = useState('');
 
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('His');
   const [body, setBody] = useState('');
 
   const handleForm = e => {
@@ -79,7 +79,7 @@ function Compose(props) {
             >
               <textarea
                 autoFocus={true}
-                placeholder="Start writing..."
+                // placeholder="Start writing..."
                 value={body}
                 onChange={e => {
                   setBody(e.target.value);

@@ -11,11 +11,25 @@ body {
   transition: background-color 500ms linear;
 }
 
-.body {
-  height: 100%;
+.root {
+  height: 100vh;
   width: 100%;
-  position: fixed;
-  background-color: $lightBlue;
+  margin: 0;
+}
+
+.poem-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .poem-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-top: 14px;
+    }
+  }
 }
 
 .title {
@@ -31,10 +45,8 @@ body {
   border-radius: 5px;
   max-width: 640px;
   box-shadow: 3px 3px 4px 1px #000000;
-}
-
-.fact-box {
-  height: 220px;
+  margin: 28px auto;
+  max-width: 760px;
 }
 
 .foot {
@@ -42,7 +54,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: $darkBlue;
+  background-color: $limed-spruce;
 }
 
 .foot p {

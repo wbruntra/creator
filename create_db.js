@@ -12,16 +12,16 @@ db.serialize(function() {
     'CREATE TABLE `entries` ( \
   	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, \
   	`title`	TEXT, \
-  	`body`	TEXT, \
+    `body`	TEXT, \
+    `creator_email` TEXT, \
     `updated`	INTEGER \
   );';
   db.run(sql);
-  _.forEach(testEntries, ({ title, body }) => {
-    db.run(`INSERT INTO entries(title, body, updated) VALUES (?, ?, ?)`, [
-      title,
-      body,
-      timeNow,
-    ]);
+  _.forEach(testEntries, ({ title, body, creator_email }) => {
+    db.run(
+      `INSERT INTO entries(title, body, creator_email, updated) VALUES (?, ?, ?, ?)`,
+      [title, body, creator_email, timeNow]
+    );
   });
 });
 

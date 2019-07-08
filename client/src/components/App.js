@@ -21,21 +21,17 @@ function App() {
   return (
     <div className="body">
       <div className="container">
-        <div className="row fact-box">
-          <div className="col s12">
-            <h2 className="title">Available Works</h2>
-            <ul>
-              {data.entries.map((entry, i) => {
-                return (
-                  <div key={`entry-${i}`}>
-                    <li className="entry-title">
-                      <Link to={`/entries/${entry.id}`}>{entry.title}</Link>
-                    </li>
-                  </div>
-                );
-              })}
-            </ul>
-          </div>
+        <div className="poem-box">
+          <h2 className="title">Available Works</h2>
+          <ul className="poem-list">
+            {data.entries.map((entry, i) => {
+              return (
+                <li key={`entry-${i}`} className="entry-title">
+                  <Link to={`/entries/${entry.id}`}>{entry.title}</Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
       <div className="foot right-align">

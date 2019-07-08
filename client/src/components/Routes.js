@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Main from './App';
 import Compose from './Compose';
 import EntryDisplay from './EntryDisplay';
+import Signin from './Signin';
 
 function AppRouter() {
   return (
@@ -23,6 +24,7 @@ function AppRouter() {
         </nav> */}
 
         <Route path="/" exact component={Compose} />
+        <Route path="/signin" exact component={Signin} />
         <Route path="/entries" exact component={Main} />
         <Route path="/entries/:id" component={EntryDisplay} />
       </>
