@@ -1,0 +1,50 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.body,
+.foot,
+.btn {
+  transition: background-color 500ms linear;
+}
+
+.body {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: $lightBlue;
+}
+
+.title {
+  font-family: $serif-stack;
+  text-align: center;
+  font-size: 2.4em;
+}
+
+.container {
+  margin-top: 40px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 640px;
+  box-shadow: 3px 3px 4px 1px #000000;
+}
+
+.fact-box {
+  height: 220px;
+}
+
+.foot {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: $darkBlue;
+}
+
+.foot p {
+  padding-right: 40px;
+}

@@ -1,0 +1,32 @@
+.center-text {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+
+  &.vertical {
+    flex-direction: column;
+
+    &.full {
+      height: 100vh;
+    }
+  }
+
+  &.center {
+    align-items: center;
+  }
+
+  &.stretch {
+    align-items: stretch;
+  }
+}
+
+.flex-child {
+  flex: 1;
+  margin: auto 8px;
+
+  @media screen and (min-width: $phone) {
+    margin: auto 24px;
+  }
+}

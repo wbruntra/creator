@@ -1,0 +1,66 @@
+.composer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100vh;
+
+  @media screen and (min-width: 900px) {
+    justify-content: space-between;
+    align-items: stretch;
+    width: 80%;
+    max-width: 960px;
+    flex-direction: row;
+  }
+
+  .entry-title,
+  textarea,
+  input {
+    background-color: $outer-space;
+    color: $white;
+    border: none;
+  }
+
+  input:focus {
+    outline-offset: 0;
+    outline: none;
+  }
+
+  textarea {
+    border: 0;
+    width: 100%;
+    font-family: $mono-stack;
+    border-color: none;
+    box-shadow: none;
+    outline: none;
+    resize: none;
+    border-right: 1px solid $bondi-blue;
+    line-height: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .entry-title {
+    font-family: $serif-stack;
+    font-size: 2em;
+    text-align: center;
+    max-width: 640px;
+  }
+
+  h2 {
+    padding-top: 2rem;
+    flex: 1;
+  }
+
+  form {
+    width: 100%;
+    flex: 9;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    @media screen and (min-width: 900px) {
+      flex-direction: column;
+      height: 70vh;
+      justify-content: flex-end;
+    }
+  }
+}

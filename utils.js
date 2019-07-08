@@ -1,0 +1,7 @@
+const timeNow = () => {
+  return Math.round(new Date().getTime() / 1000);
+};
+
+module.exports = {
+  timeNow,
+};
