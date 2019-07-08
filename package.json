@@ -10,7 +10,6 @@
     "process": "python3 fact_processor.py"
   },
   "dependencies": {
-    "better-sqlite3": "^5.4.0",
     "concurrently": "^4.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

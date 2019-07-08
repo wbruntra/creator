@@ -1,8 +1,11 @@
 var path = require('path');
 var express = require('express');
 var router = express.Router();
-var Database = require('better-sqlite3');
-var db = new Database(path.join(__dirname, '..', 'data', 'main.db'));
+// var Database = require('better-sqlite3');
+// var db = new Database(path.join(__dirname, '..', 'data', 'main.db'));
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database(path.join(__dirname, '..', 'data', 'main.db'));
+const { promisify } = require('util');
 
 const { timeNow } = require('../utils');
 
@@ -12,19 +15,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/entries', (req, res) => {
-  const entries = db.prepare('SELECT * FROM entries').all();
-  res.send({ entries });
+  db.prepare('SELECT * FROM entries').all((err, entries) => {
+    res.send({ entries });
+  });
 });
 
 router.get('/entries/:id', (req, res) => {
-  const entry = db
-    .prepare('SELECT * FROM entries WHERE ID = ?')
-    .get(req.params.id);
-  // const entry = {
-  //   title: 'yeah',
-  //   body: 'you rule!',
-  // };
-  res.send(entry);
+  db.prepare('SELECT * FROM entries WHERE ID = ?').get(
+    req.params.id,
+    (err, entry) => {
+      res.send(entry);
+    }
+  );
 });
 
 router.post('/entries/new', (req, res) => {
