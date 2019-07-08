@@ -36,6 +36,7 @@
     border-right: 1px solid $bondi-blue;
     line-height: 1.5rem;
     font-size: 1rem;
+    padding-left: 8px;
   }
 
   .entry-title {
@@ -57,7 +58,8 @@
 
   .sidebar {
     flex-direction: row;
-    @media screen and (min-width: 900px) {
+    padding-left: 8px;
+    @media screen and (min-width: $phone) {
       flex-direction: column;
       height: 70vh;
       justify-content: flex-end;
