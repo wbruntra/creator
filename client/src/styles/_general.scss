@@ -9,7 +9,7 @@
     flex-direction: column;
 
     &.full {
-      height: 90vh;
+      height: 100vh;
     }
   }
 
@@ -31,6 +31,7 @@
 }
 
 .foot {
+  background-color: $limed-spruce;
   font-family: $mono-stack;
   padding-left: 16px;
   margin-top: auto;

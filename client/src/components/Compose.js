@@ -9,14 +9,14 @@ import Footer from './Footer';
 function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
   return (
     <form
-      className="flex flex-child"
+      className="flex"
       onSubmit={e => {
         e.preventDefault();
         setTitle(draftTitle);
       }}
     >
       <input
-        className="entry-title center-text flex-child"
+        className="entry-title center-text"
         onChange={e => {
           setDraftTitle(e.target.value);
         }}

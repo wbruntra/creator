@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Footer from './Footer';
 
 function EntryDisplay({ match }) {
   const [entry, setEntry] = useState({});
@@ -18,16 +19,15 @@ function EntryDisplay({ match }) {
   }, []);
 
   return (
-    <div className="body">
-      <div className="container">
-        <div className="poem-box">
-          <h2 className="title">{entry.title}</h2>
-          <p style={{ whiteSpace: 'pre' }}>{entry.body}</p>
-        </div>
+    <div className="flex vertical full">
+      <h2 className="title">{entry.title}</h2>
+      <div className="poem-box">
+        <p style={{ whiteSpace: 'pre' }}>{entry.body}</p>
       </div>
       {/* <div className="foot right-align">
         <p>Created by William Bruntrager</p>
       </div> */}
+      <Footer />
     </div>
   );
 }

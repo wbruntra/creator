@@ -22,6 +22,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  overflow: auto;
 
   a,
   a:visited {
@@ -31,7 +33,11 @@ body {
   .poem-list {
     list-style: none;
     padding: 0;
-    // width: 60%;
+    width: 80%;
+
+    @media (min-width: $phone) {
+      width: 60%;
+    }
 
     li,
     .poem-item {
@@ -42,7 +48,7 @@ body {
     i {
       text-decoration: none;
       color: $white;
-      margin-left: 32px;
+      margin-left: 24px;
       cursor: pointer;
     }
 
@@ -72,8 +78,7 @@ body {
   // position: fixed;
   // left: 0;
   // bottom: 0;
-  width: 100%;
-  background-color: $limed-spruce;
+  // width: 100%;
 }
 
 .foot p {

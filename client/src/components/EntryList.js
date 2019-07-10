@@ -27,9 +27,9 @@ function App({ user }) {
   }, []);
 
   return (
-    <div className="body flex vertical full">
+    <div className="flex vertical full">
+      <h2 className="title">Available Works</h2>
       <div className="poem-box">
-        <h2 className="title">Available Works</h2>
         <ul className="poem-list">
           {data.entries.map((entry, i) => {
             return (
