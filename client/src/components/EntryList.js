@@ -4,6 +4,7 @@ import axios from 'axios';
 import { get } from 'micro-dash';
 import { connect } from 'react-redux';
 import { mapStateToProps } from './redux-helpers';
+import Footer from './Footer';
 
 function App({ user }) {
   const [data, setData] = useState({ entries: [] });
@@ -35,27 +36,28 @@ function App({ user }) {
               return (
                 <li key={`entry-${i}`} className="entry-title">
                   <Link to={`/entries/${entry.id}`}>{entry.title}</Link>
-                  {get(user, ['profile', 'email']) === entry.creator_email && [
-                    ' ',
-                    <Link to={`/compose/${entry.id}`}>edit</Link>,
-                    ' ',
-                    <a
-                      onClick={() => {
-                        deleteEntry(entry.id);
-                      }}
-                    >
-                      del
-                    </a>,
-                  ]}
+                  {get(user, ['profile', 'email']) === entry.creator_email && (
+                    <span className="right-box">
+                      <Link to={`/compose/${entry.id}`}>
+                        <i className="material-icons">edit</i>
+                      </Link>
+                      <i
+                        className="material-icons"
+                        onClick={() => {
+                          deleteEntry(entry.id);
+                        }}
+                      >
+                        delete
+                      </i>
+                    </span>
+                  )}
                 </li>
               );
             })}
           </ul>
         </div>
       </div>
-      <div className="foot right-align">
-        <p>Created by William Bruntrager</p>
-      </div>
+      <Footer />
     </div>
   );
 }

@@ -25,9 +25,22 @@ body {
   .poem-list {
     list-style: none;
     padding: 0;
+    width: 60%;
 
     li {
+      width: 100%;
       margin-top: 14px;
+    }
+
+    i {
+      text-decoration: none;
+      color: black;
+      margin-left: 32px;
+      cursor: pointer;
+    }
+
+    .right-box {
+      float: right;
     }
   }
 }

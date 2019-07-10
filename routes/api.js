@@ -41,9 +41,8 @@ router.get('/entries', useDb, async (req, res) => {
   res.send({ entries });
 });
 
-router.get('/entries/:id', async (req, res) => {
-  const db = req.db;
-  const entry = await db.get(
+router.get('/entries/:id', useDb, async (req, res) => {
+  const entry = await req.db.get(
     'SELECT * FROM entries WHERE id = ?',
     req.params.id
   );
@@ -65,13 +64,16 @@ router.post('/entries/new', async (req, res) => {
   }
 });
 
-router.delete('/entries/:id', useDb, loadEntry, async (req, res) => {
+router.delete('/entries/:id', useDb, async (req, res) => {
   const { id } = req.params;
-  if (_.get(req.session, 'profile.email' !== req.entry.creator_email)) {
-    return res.sendStatus(403);
-  }
-  await req.db.run('DELETE FROM entries WHERE id = ?', id);
-  res.sendStatus(200);
+  // if (_.get(req.session, 'profile.email' !== req.entry.creator_email)) {
+  //   return res.sendStatus(403);
+  // }
+  const result = await req.db.run(
+    'DELETE FROM entries WHERE id = ? AND creator_email = ?',
+    [id, req.session.profile.email]
+  );
+  res.sendStatus(204);
 });
 
 router.post('/entries/edit', async (req, res) => {

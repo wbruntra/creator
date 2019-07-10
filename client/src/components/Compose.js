@@ -4,6 +4,7 @@ import { isEmpty } from 'micro-dash';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { mapStateToProps } from './redux-helpers';
+import Footer from './Footer';
 
 function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
   return (
@@ -131,6 +132,7 @@ function Compose(props) {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }
