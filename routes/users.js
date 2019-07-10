@@ -9,13 +9,6 @@ const {
   GOOGLE_REDIRECT_URL,
 } = process.env;
 
-// {
-//   GOOGLE_CLIENT_ID:
-//     '829775379643-lqj5odf4beug28egifu3p1d044ra94hj.apps.googleusercontent.com',
-//   GOOGLE_CLIENT_SECRET: 'e31H70Ce10idFERDI6h8EUdi',
-//   GOOGLE_REDIRECT_URL: 'http://localhost:3000/api/google',
-// };
-
 const scopes = [
   'https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/userinfo.profile',
@@ -29,7 +22,6 @@ const oauth2Client = new google.auth.OAuth2(
 
 /* GET users listing. */
 router.get('/', async (req, res) => {
-  console.log(req.query);
   const { code } = req.query;
   const { tokens } = await oauth2Client.getToken(code);
   const { access_token } = tokens;

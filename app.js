@@ -1,7 +1,7 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var cookieSession = require('cookie-session');
 var logger = require('morgan');
 
