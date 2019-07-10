@@ -10,6 +10,7 @@ const dbPath = path.join(__dirname, '..', 'data', 'main.db');
 const dbPromise = sqlite.open(dbPath, { Promise });
 // var db = new sqlite3.Database(dbPath);
 // const { promisify } = require('util');
+const _ = require('lodash');
 
 const { timeNow } = require('../utils');
 
@@ -19,21 +20,31 @@ const useDb = async (req, res, next) => {
   next();
 };
 
+const loadEntry = async (req, res, next) => {
+  const id = req.params.id ? req.params.id : req.body.id;
+  if (!id) {
+    return res.sendStatus(400);
+  }
+  const entry = await req.db.get('SELECT * FROM entries WHERE id = ?', id);
+  req.entry = entry;
+  next();
+};
+
 /* GET response. */
 router.get('/', function(req, res, next) {
   res.send('OK');
 });
 
-router.get('/entries', async (req, res) => {
-  const db = await dbPromise;
+router.get('/entries', useDb, async (req, res) => {
+  const db = req.db;
   const entries = await db.all('SELECT * FROM entries');
   res.send({ entries });
 });
 
 router.get('/entries/:id', async (req, res) => {
-  const db = await dbPromise;
+  const db = req.db;
   const entry = await db.get(
-    'SELECT * FROM entries WHERE ID = ?',
+    'SELECT * FROM entries WHERE id = ?',
     req.params.id
   );
   res.send(entry);
@@ -50,6 +61,40 @@ router.post('/entries/new', async (req, res) => {
 
     res.sendStatus(200);
   } catch (err) {
+    res.sendStatus(500);
+  }
+});
+
+router.delete('/entries/:id', useDb, loadEntry, async (req, res) => {
+  const { id } = req.params;
+  if (_.get(req.session, 'profile.email' !== req.entry.creator_email)) {
+    return res.sendStatus(403);
+  }
+  await req.db.run('DELETE FROM entries WHERE id = ?', id);
+  res.sendStatus(200);
+});
+
+router.post('/entries/edit', async (req, res) => {
+  try {
+    const db = await dbPromise;
+    const { id, title, body } = req.body;
+
+    const entry = await db.get('SELECT * FROM entries WHERE id = ?', id);
+
+    if (_.get(req.session, 'profile.email') !== entry.creator_email) {
+      return res.sendStatus(403);
+    }
+
+    await db.run('UPDATE entries SET title=?, body=?, updated=? WHERE id = ?', [
+      title,
+      body,
+      timeNow(),
+      id,
+    ]);
+
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
     res.sendStatus(500);
   }
 });

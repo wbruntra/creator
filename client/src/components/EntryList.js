@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { get } from 'micro-dash';
+import { connect } from 'react-redux';
+import { mapStateToProps } from './redux-helpers';
 
-function App() {
+function App({ user }) {
   const [data, setData] = useState({ entries: [] });
 
+  const fetchData = async () => {
+    const result = await axios('/api/entries');
+
+    setData(result.data);
+  };
+
+  const deleteEntry = async id => {
+    if (window.confirm('Delete?')) {
+      await axios.delete(`/api/entries/${id}`);
+      fetchData();
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('/api/entries');
-
-      console.log(result.data);
-      setData(result.data);
-    };
-
     fetchData();
   }, []);
-
-  console.log(data);
 
   return (
     <div className="body">
@@ -28,6 +35,18 @@ function App() {
               return (
                 <li key={`entry-${i}`} className="entry-title">
                   <Link to={`/entries/${entry.id}`}>{entry.title}</Link>
+                  {get(user, ['profile', 'email']) === entry.creator_email && [
+                    ' ',
+                    <Link to={`/compose/${entry.id}`}>edit</Link>,
+                    ' ',
+                    <a
+                      onClick={() => {
+                        deleteEntry(entry.id);
+                      }}
+                    >
+                      del
+                    </a>,
+                  ]}
                 </li>
               );
             })}
@@ -41,4 +60,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

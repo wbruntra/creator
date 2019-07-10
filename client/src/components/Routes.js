@@ -4,6 +4,7 @@ import EntryList from './EntryList';
 import Compose from './Compose';
 import EntryDisplay from './EntryDisplay';
 import Signin from './Signin';
+import Landing from './Landing';
 import { connect } from 'react-redux';
 import { getStatus } from '../actions';
 import { mapStateToProps } from './redux-helpers';
@@ -30,7 +31,8 @@ function AppRouter({ getStatus }) {
           </ul>
         </nav> */}
 
-        <Route path="/" exact component={Compose} />
+        <Route path="/" exact component={Landing} />
+        <Route path="/compose/:id?" exact component={Compose} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/entries" exact component={EntryList} />
         <Route path="/entries/:id" component={EntryDisplay} />

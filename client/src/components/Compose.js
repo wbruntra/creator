@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { isEmpty } from 'micro-dash';
 import { Redirect } from 'react-router-dom';
@@ -33,6 +33,49 @@ function Compose(props) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
+  const handleForm = e => {
+    e.preventDefault();
+    const { id } = props.match.params;
+
+    if (!isEmpty(id)) {
+      axios
+        .post('/api/entries/edit', {
+          id,
+          title,
+          body,
+        })
+        .then(props.history.push('/entries'));
+    } else {
+      axios
+        .post('/api/entries/new', {
+          title,
+          body,
+          email: props.user.profile.email,
+        })
+        .then(props.history.push('/entries'));
+    }
+
+    setTitle('');
+    setDraftTitle('');
+    setBody('');
+  };
+
+  useEffect(() => {
+    const { id } = props.match.params;
+
+    const fetchData = async () => {
+      const result = await axios(`/api/entries/${id}`);
+
+      const { title, body } = result.data;
+      setTitle(title);
+      setBody(body);
+    };
+
+    if (!isEmpty(id)) {
+      fetchData();
+    }
+  }, [props.match.params]);
+
   if (!props.user.initialized) {
     return null;
   }
@@ -40,20 +83,6 @@ function Compose(props) {
   if (isEmpty(props.user.profile)) {
     props.history.push('/signin');
   }
-
-  const handleForm = e => {
-    e.preventDefault();
-    axios
-      .post('/api/entries/new', {
-        title,
-        body,
-        email: props.user.profile.email,
-      })
-      .then(props.history.push('/entries'));
-    setTitle('');
-    setDraftTitle('');
-    setBody('');
-  };
 
   return (
     <div className="composer">
