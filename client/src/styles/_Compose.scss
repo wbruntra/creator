@@ -65,4 +65,9 @@
       justify-content: flex-end;
     }
   }
+
+  a,
+  a:visited {
+    color: $white;
+  }
 }

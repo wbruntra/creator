@@ -42,10 +42,10 @@ router.get('/entries/:id', async (req, res) => {
 router.post('/entries/new', async (req, res) => {
   try {
     const db = await dbPromise;
-    const { title, body } = req.body;
+    const { title, body, email } = req.body;
     await db.run(
-      'INSERT INTO entries (title, body, updated) VALUES (?, ?, ?)',
-      [title, body, timeNow()]
+      'INSERT INTO entries (title, body, creator_email, updated) VALUES (?, ?, ?, ?)',
+      [title, body, email, timeNow()]
     );
 
     res.sendStatus(200);
@@ -66,10 +66,6 @@ router.get('/users/status', useDb, async (req, res) => {
     name: req.session.name,
     signInAt: req.session.signIn,
   });
-});
-
-router.post('/users/create', (req, res) => {
-  res.send('OK');
 });
 
 router.post('/users/signin', useDb, async (req, res) => {

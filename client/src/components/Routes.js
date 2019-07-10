@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Main from './App';
+import EntryList from './EntryList';
 import Compose from './Compose';
 import EntryDisplay from './EntryDisplay';
 import Signin from './Signin';
+import { connect } from 'react-redux';
+import { getStatus } from '../actions';
+import { mapStateToProps } from './redux-helpers';
 
-function AppRouter() {
+function AppRouter({ getStatus }) {
+  useEffect(() => {
+    getStatus();
+  }, [getStatus]);
+
   return (
     <Router>
       <>
@@ -25,11 +32,14 @@ function AppRouter() {
 
         <Route path="/" exact component={Compose} />
         <Route path="/signin" exact component={Signin} />
-        <Route path="/entries" exact component={Main} />
+        <Route path="/entries" exact component={EntryList} />
         <Route path="/entries/:id" component={EntryDisplay} />
       </>
     </Router>
   );
 }
 
-export default AppRouter;
+export default connect(
+  mapStateToProps,
+  { getStatus }
+)(AppRouter);

@@ -20,12 +20,17 @@ function EntryDisplay({ match }) {
   }, []);
 
   return (
-    <div className="body">
-      <div style={styles} className="container">
-        <button>
-          <a href={url}>Sign in</a>
-        </button>
+    <div className="composer">
+      <div style={{ height: '50vh' }} className="flex vertical flex-child">
+        <p className="entry-title center-text flex-child">
+          Welcome! To write something, please <a href={url}>sign in</a> with
+          your Google account.
+        </p>
+        <p className="entry-title center-text flex-child">
+          Or you can just <Link to="/entries">read</Link> the available works.
+        </p>
       </div>
+
       <div className="foot right-align">
         <p>Created by William Bruntrager</p>
       </div>

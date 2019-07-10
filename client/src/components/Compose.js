@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { isEmpty } from 'micro-dash';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { mapStateToProps } from './redux-helpers';
 
 function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
   return (
@@ -27,9 +30,16 @@ function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
 
 function Compose(props) {
   const [draftTitle, setDraftTitle] = useState('');
-
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+
+  if (!props.user.initialized) {
+    return null;
+  }
+
+  if (isEmpty(props.user.profile)) {
+    props.history.push('/signin');
+  }
 
   const handleForm = e => {
     e.preventDefault();
@@ -37,23 +47,13 @@ function Compose(props) {
       .post('/api/entries/new', {
         title,
         body,
+        email: props.user.profile.email,
       })
       .then(props.history.push('/entries'));
     setTitle('');
     setDraftTitle('');
     setBody('');
   };
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     const textHeight = formEl.current ? formEl.current.offsetHeight : 0;
-  //     console.log('Form height', formEl.current.offsetHeight);
-  //   };
-  //   window.addEventListener('resize', handleResize);
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
 
   return (
     <div className="composer">
@@ -106,4 +106,4 @@ function Compose(props) {
   );
 }
 
-export default Compose;
+export default connect(mapStateToProps)(Compose);
