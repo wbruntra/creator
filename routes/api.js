@@ -11,7 +11,7 @@ const dbPromise = sqlite.open(dbPath, { Promise });
 // var db = new sqlite3.Database(dbPath);
 // const { promisify } = require('util');
 
-const { bcryptVerify, timeNow } = require('../utils');
+const { timeNow } = require('../utils');
 
 const useDb = async (req, res, next) => {
   const db = await dbPromise;
@@ -68,24 +68,24 @@ router.get('/users/status', useDb, async (req, res) => {
   });
 });
 
-router.post('/users/signin', useDb, async (req, res) => {
-  const { name, password } = req.body;
-  try {
-    const row = await req.db.get('SELECT * FROM users WHERE name = ?', name);
-    const success = await bcryptVerify(password, row.password);
-    if (success) {
-      req.session = {
-        name,
-        signIn: timeNow(),
-      };
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(401);
-    }
-  } catch (err) {
-    res.sendStatus(500);
-  }
-});
+// router.post('/users/signin', useDb, async (req, res) => {
+//   const { name, password } = req.body;
+//   try {
+//     const row = await req.db.get('SELECT * FROM users WHERE name = ?', name);
+//     const success = await bcryptVerify(password, row.password);
+//     if (success) {
+//       req.session = {
+//         name,
+//         signIn: timeNow(),
+//       };
+//       res.sendStatus(200);
+//     } else {
+//       res.sendStatus(401);
+//     }
+//   } catch (err) {
+//     res.sendStatus(500);
+//   }
+// });
 
 router.post('/users/signout', (req, res) => {
   res.send('OK');
