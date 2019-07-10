@@ -31,10 +31,18 @@
 }
 
 .foot {
+  font-family: $mono-stack;
   padding-left: 24px;
   a,
   p {
     color: $white;
     text-decoration: none;
+  }
+
+  .username {
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    margin-right: 16px;
   }
 }
