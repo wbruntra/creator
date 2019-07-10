@@ -27,35 +27,33 @@ function App({ user }) {
   }, []);
 
   return (
-    <div className="body">
-      <div className="container">
-        <div className="poem-box">
-          <h2 className="title">Available Works</h2>
-          <ul className="poem-list">
-            {data.entries.map((entry, i) => {
-              return (
-                <li key={`entry-${i}`} className="entry-title">
-                  <Link to={`/entries/${entry.id}`}>{entry.title}</Link>
-                  {get(user, ['profile', 'email']) === entry.creator_email && (
-                    <span className="right-box">
-                      <Link to={`/compose/${entry.id}`}>
-                        <i className="material-icons">edit</i>
-                      </Link>
-                      <i
-                        className="material-icons"
-                        onClick={() => {
-                          deleteEntry(entry.id);
-                        }}
-                      >
-                        delete
-                      </i>
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+    <div className="body flex vertical full">
+      <div className="poem-box">
+        <h2 className="title">Available Works</h2>
+        <ul className="poem-list">
+          {data.entries.map((entry, i) => {
+            return (
+              <li key={`entry-${i}`} className="entry-title flex">
+                <Link to={`/entries/${entry.id}`}>{entry.title}</Link>
+                {get(user, ['profile', 'email']) === entry.creator_email && (
+                  <div className="push">
+                    <Link to={`/compose/${entry.id}`}>
+                      <i className="material-icons">edit</i>
+                    </Link>
+                    <i
+                      className="material-icons"
+                      onClick={() => {
+                        deleteEntry(entry.id);
+                      }}
+                    >
+                      delete
+                    </i>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
       <Footer />
     </div>

@@ -1,8 +1,9 @@
 body {
   font-family: "Open Sans", sans-serif;
-  color: black;
+  color: $white;
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 .body,
@@ -22,19 +23,25 @@ body {
   flex-direction: column;
   align-items: center;
 
+  a,
+  a:visited {
+    color: $white;
+  }
+
   .poem-list {
     list-style: none;
     padding: 0;
-    width: 60%;
+    // width: 60%;
 
-    li {
+    li,
+    .poem-item {
       width: 100%;
       margin-top: 14px;
     }
 
     i {
       text-decoration: none;
-      color: black;
+      color: $white;
       margin-left: 32px;
       cursor: pointer;
     }
@@ -53,19 +60,18 @@ body {
 
 .container {
   margin-top: 40px;
-  background-color: white;
+  // background-color: white;
   padding: 15px;
   border-radius: 5px;
-  max-width: 640px;
-  box-shadow: 3px 3px 4px 1px #000000;
-  margin: 28px auto;
-  max-width: 760px;
+  // box-shadow: 3px 3px 4px 1px #000000;
+  // margin: 28px auto;
+  // max-width: 760px;
 }
 
 .foot {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  // position: fixed;
+  // left: 0;
+  // bottom: 0;
   width: 100%;
   background-color: $limed-spruce;
 }

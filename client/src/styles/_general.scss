@@ -9,7 +9,7 @@
     flex-direction: column;
 
     &.full {
-      height: 100vh;
+      height: 90vh;
     }
   }
 
@@ -32,7 +32,8 @@
 
 .foot {
   font-family: $mono-stack;
-  padding-left: 24px;
+  padding-left: 16px;
+  margin-top: auto;
   a,
   p {
     color: $white;
@@ -41,8 +42,9 @@
 
   .username {
     font-weight: bold;
-    position: absolute;
-    right: 0;
-    margin-right: 16px;
   }
+}
+
+.push {
+  margin-left: auto;
 }

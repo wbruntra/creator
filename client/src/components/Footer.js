@@ -13,7 +13,9 @@ function Footer({ user }) {
       <p>
         <Link to="/entries">Entries</Link>
       </p>
-      <p className="username">{getUsername(user)}</p>
+      <div className="push">
+        <p className="username">{getUsername(user)}</p>
+      </div>
     </div>
   );
 }
