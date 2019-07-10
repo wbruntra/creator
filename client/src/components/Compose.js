@@ -101,7 +101,14 @@ function Compose(props) {
           />
         ) : (
           <>
-            <h2 className="flex-child entry-title">{title}</h2>
+            <h2
+              onClick={() => {
+                setTitle('');
+              }}
+              className="flex-child entry-title"
+            >
+              {title}
+            </h2>
             <form
               style={{ justifyContent: 'space-between' }}
               className="flex flex-child"
