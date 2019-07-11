@@ -17,6 +17,17 @@
     overflow: auto;
   }
 
+  .title-form {
+    input {
+      padding-top: 40%;
+
+      @media screen and (min-width: $phone) {
+        padding-top: 0;
+        flex-direction: row;
+      }
+    }
+  }
+
   .entry-title,
   textarea,
   input {

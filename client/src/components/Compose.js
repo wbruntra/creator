@@ -16,31 +16,6 @@ export const ButtonHolder = ({ handleForm }) => {
   );
 };
 
-function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
-  return (
-    <form
-      className="flex vertical"
-      onSubmit={e => {
-        e.preventDefault();
-        setTitle(draftTitle);
-      }}
-    >
-      <div>
-        <input
-          className="entry-title center-text"
-          onChange={e => {
-            setDraftTitle(e.target.value);
-          }}
-          value={draftTitle}
-          placeholder="Enter Title Here"
-          autoFocus={true}
-        />
-        <input type="submit" hidden />
-      </div>
-    </form>
-  );
-}
-
 function Compose(props) {
   const [draftTitle, setDraftTitle] = useState('');
   const [title, setTitle] = useState('');
@@ -101,13 +76,13 @@ function Compose(props) {
     return (
       <div className="composer">
         <form
+          className="title-form"
           onSubmit={e => {
             e.preventDefault();
             setTitle(draftTitle);
           }}
         >
           <input
-            style={{ paddingTop: '40%' }}
             className="entry-title center-text"
             onChange={e => {
               setDraftTitle(e.target.value);
