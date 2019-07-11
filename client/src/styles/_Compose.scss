@@ -1,16 +1,21 @@
 .composer {
   display: flex;
-  width: 100%;
+  // width: 100%;
   flex-direction: column;
   height: 100vh;
 
-  // @media screen and (min-width: 900px) {
-  //   justify-content: space-between;
-  //   align-items: stretch;
-  //   width: 80%;
-  //   max-width: 960px;
-  //   flex-direction: row;
-  // }
+  @media screen and (min-width: $tablet) {
+    // justify-content: space-between;
+    // align-items: stretch;
+    // width: 80%;
+    // max-width: 960px;
+    // flex-direction: row;
+  }
+
+  .main {
+    flex: 1;
+    overflow: auto;
+  }
 
   .entry-title,
   textarea,
@@ -25,20 +30,6 @@
     outline: none;
   }
 
-  textarea {
-    border: 0;
-    width: 100%;
-    font-family: $mono-stack;
-    border-color: none;
-    box-shadow: none;
-    outline: none;
-    resize: none;
-    border-right: 1px solid $bondi-blue;
-    line-height: 1.5rem;
-    font-size: 1rem;
-    padding-left: 8px;
-  }
-
   .entry-title {
     font-family: $serif-stack;
     font-size: 2em;
@@ -46,23 +37,50 @@
     max-width: 640px;
   }
 
-  h2 {
-    padding-top: 2rem;
+  textarea {
+    flex: 9;
+    border: 0;
+    font-size: 0.75em;
+
+    @media screen and (min-width: $phone) {
+      flex: none;
+      width: 50ch;
+      font-size: 1em;
+    }
+
+    font-family: $mono-stack;
+    resize: none;
+    outline: none;
+    border-right: 1px solid $bondi-blue;
+    line-height: 1.5rem;
+    padding-left: 8px;
+  }
+
+  .button-holder {
+    margin-left: 16px;
+    @media screen and (min-width: $tablet) {
+      margin-left: 48px;
+    }
+  }
+
+  h2,
+  form {
+    @media screen and (min-width: $tablet) {
+      padding: 0 40px;
+    }
+  }
+
+  .form-holder {
     flex: 1;
   }
 
   form {
-    width: 100%;
-    flex: 9;
-  }
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 
-  .sidebar {
-    flex-direction: row;
-    padding-left: 8px;
     @media screen and (min-width: $phone) {
-      flex-direction: column;
-      height: 70vh;
-      justify-content: flex-end;
+      flex-direction: row;
     }
   }
 

@@ -1,3 +1,10 @@
+body {
+  color: $white;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
 .center-text {
   text-align: center;
 }
@@ -23,8 +30,6 @@
 }
 
 .flex-child {
-  flex: 1;
-
   @media screen and (min-width: $phone) {
     margin: auto 24px;
   }
@@ -39,6 +44,10 @@
   p {
     color: $white;
     text-decoration: none;
+  }
+
+  p {
+    padding-right: 40px;
   }
 
   .username {

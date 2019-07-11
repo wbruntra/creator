@@ -6,25 +6,37 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from './redux-helpers';
 import Footer from './Footer';
 
+export const ButtonHolder = ({ handleForm }) => {
+  return (
+    <div className="button-holder">
+      <button className="btn btn-white" onClick={handleForm} type="submit">
+        Save
+      </button>
+    </div>
+  );
+};
+
 function TitleEntryForm({ setTitle, draftTitle, setDraftTitle }) {
   return (
     <form
-      className="flex"
+      className="flex vertical"
       onSubmit={e => {
         e.preventDefault();
         setTitle(draftTitle);
       }}
     >
-      <input
-        className="entry-title center-text"
-        onChange={e => {
-          setDraftTitle(e.target.value);
-        }}
-        value={draftTitle}
-        placeholder="Enter Title Here"
-        autoFocus={true}
-      />
-      <input type="submit" hidden />
+      <div>
+        <input
+          className="entry-title center-text"
+          onChange={e => {
+            setDraftTitle(e.target.value);
+          }}
+          value={draftTitle}
+          placeholder="Enter Title Here"
+          autoFocus={true}
+        />
+        <input type="submit" hidden />
+      </div>
     </form>
   );
 }
@@ -85,61 +97,57 @@ function Compose(props) {
     props.history.push('/signin');
   }
 
+  if (isEmpty(title)) {
+    return (
+      <div className="composer">
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            setTitle(draftTitle);
+          }}
+        >
+          <input
+            style={{ paddingTop: '40%' }}
+            className="entry-title center-text"
+            onChange={e => {
+              setDraftTitle(e.target.value);
+            }}
+            value={draftTitle}
+            placeholder="Enter Title Here"
+            autoFocus={true}
+          />
+          <input type="submit" hidden />
+        </form>
+
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="composer">
-      <div
-        className={`flex-child flex full vertical ${
-          isEmpty(title) ? 'center' : 'stretch'
-        }`}
-        style={{ flex: 5 }}
+      <h2
+        onClick={() => {
+          setTitle('');
+        }}
+        className="entry-title"
       >
-        {isEmpty(title) ? (
-          <TitleEntryForm
-            setTitle={setTitle}
-            draftTitle={draftTitle}
-            setDraftTitle={setDraftTitle}
+        {title}
+      </h2>
+      <div className="form-holder">
+        <form className="flex" onSubmit={handleForm}>
+          <textarea
+            autoFocus={true}
+            // placeholder="Start writing..."
+            value={body}
+            onChange={e => {
+              setBody(e.target.value);
+            }}
           />
-        ) : (
-          <>
-            <h2
-              onClick={() => {
-                setTitle('');
-              }}
-              className="flex-child entry-title"
-            >
-              {title}
-            </h2>
-            <form
-              style={{ justifyContent: 'space-between' }}
-              className="flex flex-child"
-              onSubmit={handleForm}
-            >
-              <textarea
-                autoFocus={true}
-                // placeholder="Start writing..."
-                value={body}
-                onChange={e => {
-                  setBody(e.target.value);
-                }}
-              />
-            </form>
-          </>
-        )}
+          {window.innerWidth >= 480 && <ButtonHolder handleForm={handleForm} />}
+        </form>
       </div>
-      {!isEmpty(title) && (
-        <div className="sidebar flex-child flex vertical" style={{ flex: 1 }}>
-          <div className="flex-child">
-            <button
-              className="btn btn-white"
-              onClick={handleForm}
-              type="submit"
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      )}
-      <Footer />
+      <Footer saveButton={window.innerWidth < 480} handleForm={handleForm} />
     </div>
   );
 }
