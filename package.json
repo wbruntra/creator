@@ -10,7 +10,7 @@
     "process": "python3 fact_processor.py"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.5",
     "concurrently": "^4.1.1",
     "cookie-parser": "~1.4.4",
